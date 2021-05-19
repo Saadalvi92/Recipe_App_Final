@@ -1,17 +1,63 @@
 import React from 'react';
+import {Alert} from 'react-native';
 import * as yup from 'yup';
-import AppButton from '../../Components/AppButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AppForm, AppFormField, SubmitButton} from '../../Components/forms';
-import {LoginButton, AccessToken} from 'react-native-fbsdk';
 const validationSchema = yup.object().shape({
   email: yup.string().required().email().label('Email'),
-  password: yup.string().required().min(4).label('Password'),
+  password: yup.string().required().min(6).label('Password'),
 });
 function LoginScreen({navigation}) {
+  const Login = async Values => {
+    const Header = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: Header,
+      body: JSON.stringify({
+        email: Values.email,
+        password: Values.password,
+      }),
+    };
+    try {
+      const response = await fetch(
+        'http://auth.suretostop.com/api/auth/login',
+        requestOptions,
+      );
+      const data = await response.text();
+
+      let newData = JSON.parse(data);
+
+      console.log(newData);
+
+      if (newData.accessToken) {
+        storeData('yes');
+
+        navigation.navigate('Recipes');
+      } else {
+        alert('Please Check your login Credentials');
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // asyncStorage StoreData
+  const storeData = async value => {
+    try {
+      await AsyncStorage.setItem('@storage_Key', value);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <AppForm
       initialValues={{email: '', password: ''}}
-      onSubmit={Values => navigation.navigate('Recipes')}
+      onSubmit={Values => Login(Values)}
       validationSchema={validationSchema}>
       <AppFormField
         placeholder="Email                            "
@@ -30,21 +76,6 @@ function LoginScreen({navigation}) {
         secureTextEntry={true}
       />
       <SubmitButton title="Login" />
-      {/* <LoginButton
-        style={{borderRadius: '100%', width: 150, height: 30, marginLeft: 20}}
-        onLoginFinished={(error, result) => {
-          if (error) {
-            console.log('login has error: ' + result.error);
-          } else if (result.isCancelled) {
-            console.log('login is cancelled.');
-          } else {
-            AccessToken.getCurrentAccessToken().then(data => {
-              console.log(data.accessToken.toString());
-            });
-          }
-        }}
-        onLogoutFinished={() => console.log('logout.')}
-      /> */}
     </AppForm>
   );
 }
