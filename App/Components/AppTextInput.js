@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, TextInput, StyleSheet, Platform} from 'react-native';
-import colors from '../config/colors';
 import AppIcon from './AppIcon';
 import textdefault from '../config/textdefault';
 
@@ -21,7 +20,7 @@ function AppTextInput({icon, iconColor, size, backgroundColor, ...otherprops}) {
 
 const styles = StyleSheet.create({
   Container: {
-    backgroundColor: colors.lightGrey,
+    backgroundColor: '#a9a9a9',
     borderRadius: 25,
     flexDirection: 'row',
     width: '100%',

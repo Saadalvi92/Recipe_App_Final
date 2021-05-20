@@ -6,7 +6,6 @@ import {
   AppFormField as FormField,
   SubmitButton,
 } from '../../Components/forms';
-import styles from './Style';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label('Name'),
@@ -51,7 +50,13 @@ function RegisterScreen({navigation}) {
     }
   };
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+      }}>
       <Form
         initialValues={{name: '', email: '', password: ''}}
         onSubmit={Values => PostRequestForSignUp(Values)}

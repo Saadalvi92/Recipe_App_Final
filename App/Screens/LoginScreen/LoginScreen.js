@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert} from 'react-native';
+import {Alert, View} from 'react-native';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AppForm, AppFormField, SubmitButton} from '../../Components/forms';
@@ -31,14 +31,20 @@ function LoginScreen({navigation}) {
 
       let newData = JSON.parse(data);
 
-      console.log(newData);
+      // console.log();
+      //
 
       if (newData.accessToken) {
         storeData('yes');
-
-        navigation.navigate('Recipes');
+        const dataroute = {
+          email: newData.data.email,
+          userName: newData.data.userName,
+        };
+        // console.log(dataroute);
+        navigation.push('Recipes', dataroute);
       } else {
-        alert('Please Check your login Credentials');
+        Alert.alert('Login Failed', 'Please Check your login Credentials');
+        // alert();
       }
     } catch (err) {
       console.log(err);
@@ -55,28 +61,36 @@ function LoginScreen({navigation}) {
   };
 
   return (
-    <AppForm
-      initialValues={{email: '', password: ''}}
-      onSubmit={Values => Login(Values)}
-      validationSchema={validationSchema}>
-      <AppFormField
-        placeholder="Email                            "
-        autoCaptalize="none"
-        icon="email"
-        name="email"
-        keyboardType="email-address"
-        textContentType="emailAddress"
-      />
-      <AppFormField
-        placeholder="Password                             "
-        autoCaptalize="none"
-        autoCorrect={false}
-        icon="lock"
-        name="password"
-        secureTextEntry={true}
-      />
-      <SubmitButton title="Login" />
-    </AppForm>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+      }}>
+      <AppForm
+        initialValues={{email: '', password: ''}}
+        onSubmit={Values => Login(Values)}
+        validationSchema={validationSchema}>
+        <AppFormField
+          placeholder="Email                            "
+          autoCaptalize="none"
+          icon="email"
+          name="email"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+        />
+        <AppFormField
+          placeholder="Password                             "
+          autoCaptalize="none"
+          autoCorrect={false}
+          icon="lock"
+          name="password"
+          secureTextEntry={true}
+        />
+        <SubmitButton title="Login" />
+      </AppForm>
+    </View>
   );
 }
 
