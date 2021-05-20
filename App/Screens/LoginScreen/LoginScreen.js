@@ -31,8 +31,7 @@ function LoginScreen({navigation}) {
 
       let newData = JSON.parse(data);
 
-      // console.log();
-      //
+      // console.log(newData);
 
       if (newData.accessToken) {
         storeData('yes');
@@ -63,33 +62,40 @@ function LoginScreen({navigation}) {
   return (
     <View
       style={{
-        flex: 1,
+        width: '100%',
+        hiehgt: '100%',
+        backgroundColor: '#a9a9a9',
         justifyContent: 'center',
-        marginLeft: 10,
-        marginRight: 10,
+        flex: 1,
       }}>
-      <AppForm
-        initialValues={{email: '', password: ''}}
-        onSubmit={Values => Login(Values)}
-        validationSchema={validationSchema}>
-        <AppFormField
-          placeholder="Email                            "
-          autoCaptalize="none"
-          icon="email"
-          name="email"
-          keyboardType="email-address"
-          textContentType="emailAddress"
-        />
-        <AppFormField
-          placeholder="Password                             "
-          autoCaptalize="none"
-          autoCorrect={false}
-          icon="lock"
-          name="password"
-          secureTextEntry={true}
-        />
-        <SubmitButton title="Login" />
-      </AppForm>
+      <View
+        style={{
+          marginLeft: 10,
+          marginRight: 10,
+        }}>
+        <AppForm
+          initialValues={{email: '', password: ''}}
+          onSubmit={Values => Login(Values)}
+          validationSchema={validationSchema}>
+          <AppFormField
+            placeholder="Email                            "
+            autoCaptalize="none"
+            icon="email"
+            name="email"
+            keyboardType="email-address"
+            textContentType="emailAddress"
+          />
+          <AppFormField
+            placeholder="Password                             "
+            autoCaptalize="none"
+            autoCorrect={false}
+            icon="lock"
+            name="password"
+            secureTextEntry={true}
+          />
+          <SubmitButton title="Login" />
+        </AppForm>
+      </View>
     </View>
   );
 }

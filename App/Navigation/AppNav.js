@@ -4,7 +4,6 @@ import WhatToEatNav from './WhatToEatNav';
 import AccountScreen from '../Screens/AccountsScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../config/colors';
-import {useEffect} from 'react';
 const Tab = createBottomTabNavigator();
 function AppNav(props) {
   // console.log(props.route.params);

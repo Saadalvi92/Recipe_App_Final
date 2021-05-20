@@ -52,41 +52,48 @@ function RegisterScreen({navigation}) {
   return (
     <View
       style={{
-        flex: 1,
+        width: '100%',
+        hiehgt: '100%',
+        backgroundColor: '#a9a9a9',
         justifyContent: 'center',
-        marginLeft: 10,
-        marginRight: 10,
+        flex: 1,
       }}>
-      <Form
-        initialValues={{name: '', email: '', password: ''}}
-        onSubmit={Values => PostRequestForSignUp(Values)}
-        validationSchema={validationSchema}>
-        <FormField
-          autoCorrect={false}
-          icon="account"
-          name="name"
-          placeholder="Name"
-        />
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          name="email"
-          placeholder="Email"
-          textContentType="emailAddress"
-        />
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          name="password"
-          placeholder="Password"
-          secureTextEntry
-          textContentType="password"
-        />
-        <SubmitButton title="Register" />
-      </Form>
+      <View
+        style={{
+          marginLeft: 10,
+          marginRight: 10,
+        }}>
+        <Form
+          initialValues={{name: '', email: '', password: ''}}
+          onSubmit={Values => PostRequestForSignUp(Values)}
+          validationSchema={validationSchema}>
+          <FormField
+            autoCorrect={false}
+            icon="account"
+            name="name"
+            placeholder="Name"
+          />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="email"
+            keyboardType="email-address"
+            name="email"
+            placeholder="Email"
+            textContentType="emailAddress"
+          />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            name="password"
+            placeholder="Password"
+            secureTextEntry
+            textContentType="password"
+          />
+          <SubmitButton title="Register" />
+        </Form>
+      </View>
     </View>
   );
 }
