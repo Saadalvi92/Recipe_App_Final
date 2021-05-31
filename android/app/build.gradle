@@ -139,10 +139,10 @@ android {
     }
  signingConfigs {
     release {
-      storeFile file('recipe_app.keystore')
-      storePassword '12345678'
-      keyAlias 'recipe'
-      keyPassword '12345678'
+      storeFile file('Smart_Resturant_app.keystore')
+      storePassword '123456'
+      keyAlias 'Smart_Resturant'
+      keyPassword '123456'
     }
   }
 
